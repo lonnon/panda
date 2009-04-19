@@ -47,7 +47,7 @@ def do_build(dir)
     
     if $? != 0
         return false
-    end
+     end
     
     return true
 end
