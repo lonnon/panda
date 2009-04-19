@@ -11,14 +11,11 @@ class Repo < ActiveRecord::Base
     
     def gather_revs
         revs = rscm.revisions(1.day.ago)
-        latest = nil
-        
-        if revs.length > 0 and not revisions.find_by_identifier(revs[-1].identifier)
-            latest = revs[-1].identifier
-        end
-        
+        @latest = nil
+                
         revs.each do |rev|
             if not revisions.find_by_identifier(rev.identifier)
+                @latest = rev.identifier
                 revision = revisions.build
                 revision.identifier = rev.identifier
                 revision.time = rev.time
@@ -28,6 +25,6 @@ class Repo < ActiveRecord::Base
             end
         end
         
-        return latest
+        return @latest
     end
 end
