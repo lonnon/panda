@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  revision_id: 1
+  log: MyText
+  rawtest: MyText
+  success: false
+  passed: 1
+  skipped: 1
+  failed: 1
+
+two:
+  revision_id: 1
+  log: MyText
+  rawtest: MyText
+  success: false
+  passed: 1
+  skipped: 1
+  failed: 1
