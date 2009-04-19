@@ -1,0 +1,21 @@
+<h2>Recent Revisions</h2>
+
+<table>
+<tr>
+<th>Repo</th>
+<th>Revision</th>
+<th>Test Runs</th>
+</tr>
+<% @revs.each do |rev| %>
+<tr>
+  <td><%=h rev.repo.name %></td>
+  <td><%=h rev.identifier %></td>
+  <% if rev.test_runs %>
+  <td><%=h rev.test_runs.count %></td>
+  <% else %>
+  <td>none available</td>
+  <% end %>
+</tr>
+
+<% end %>
+</table>
