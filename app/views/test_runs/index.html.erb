@@ -1,2 +1,18 @@
-<h1>Testruns#index</h1>
-<p>Find me in app/views/testruns/index.html.erb</p>
+<h1>Recent Test Runs</h1>
+
+<table>
+<tr>
+<th>Repo</th>
+<th>Revision</th>
+<th>Results</th>
+</tr>
+<% @tests.each do |test| %>
+<tr>
+  <td><%=h test.revision.repo.name %></td>
+  <td><%= link_to test.revision.identifier, test.revision %></td>
+  <td class="success_<%=h test.success %>">
+    <%= link_to h("#{test.passed} / #{test.skipped} / #{test.failed}"), test %>
+  </td>
+</tr>
+<% end %>
+</table>
