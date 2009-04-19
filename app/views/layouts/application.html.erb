@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<title><%=h @title %></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="generator" content="Panda 1.0">
+<link rel="stylesheet" href="http://opensimulator.org/skins/opensim/main.css" type="text/css">
+<link rel="stylesheet" href="http://planet.opensim.us/planet.css"
+      type="text/css">
+
+  <%= javascript_include_tag :defaults %>
+  <%= stylesheet_link_tag 'scaffold' %>
+  <%= stylesheet_link_tag 'panda' %>
+
+
+</head>
+
+<body>
+  <div id="headerArea3" class="mainPadding">
+    <div id="headerArea3Logo">
+OpenSim Panda Build System</div>
+    </div>
+
+<div class="daygroup">
+  <%= yield %>
+
+</div>
+
+</div>
+
+
+<div class="sidebar">
+<a href="http://opensimulator.org">
+<!--<img style="margin-left: 20px" align="center" border="0" src="images/logo.png" width="136" height="136" alt=""> -->
+</a>
+
+<p>
+<h2>OpenSim Links:</h2>
+<ul>
+<li><a href="http://opensimulator.org/">OpenSim Home</a></li>
+<li><a href="http://osgrid.org">OS Grid</a></li>
+<li><a href="http://www.ohloh.net/projects/4753?p=OpenSim">OpenSim on Ohloh</a></li>
+</ul>
+</p>
+<p>
+<strong>About</strong>
+<br/>
+<br/>
+
+</em>
+</p>
+</div>
+
+</body>
+
+</html>

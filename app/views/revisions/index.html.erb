@@ -4,16 +4,19 @@
 <tr>
 <th>Repo</th>
 <th>Revision</th>
-<th>Test Runs</th>
+<th colspan="3">Test Runs (Passed/Skipped/Failed)</th>
 </tr>
 <% @revs.each do |rev| %>
 <tr>
   <td><%=h rev.repo.name %></td>
   <td><%=h rev.identifier %></td>
-  <% if rev.test_runs %>
-  <td><%=h rev.test_runs.count %></td>
-  <% else %>
-  <td>none available</td>
+
+  <% rev.test_runs.each do |test| %>
+  <td class="success_<%=h test.success %>">
+     <%=h test.passed %> /
+     <%=h test.skipped %> /
+     <%=h test.failed %> 
+  </td>
   <% end %>
 </tr>
 
