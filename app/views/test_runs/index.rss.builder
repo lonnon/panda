@@ -14,8 +14,8 @@ xml.rss :version => "2.0" do
                 xml.title "#{test.revision.repo.name} - #{test.revision.identifier} - #{success}"
                 xml.description "#{test.revision.repo.name} - #{test.revision.identifier} - Test Results (Passed / Skipped / Failed): #{test.passed} / #{test.skipped} / #{test.failed}"
                 xml.pubDate test.updated_at.to_s(:rfc822)
-                xml.link formatted_test_run_url(test, :rss)
-                xml.guid formatted_test_run_url(test, :rss)
+                xml.link formatted_test_run_url(test, :html)
+                xml.guid formatted_test_run_url(test, :html)
             end
         end
     end
