@@ -1,0 +1,21 @@
+<h1>Test Run <%=h @test.id %></h1>
+<table>
+  <tr>
+    <td>Repository</td><td><%=h @test.revision.repo.name %></td>
+  </tr>
+  <tr>
+    <td>Repository Version</td><td>
+      <%= link_to @test.revision.identifier, @test.revision %></td>
+  </tr>
+  <tr>
+    <td>Results (P/S/F)</td>
+    <td class="success_<%=h @test.success %>">
+      <%=h @test.passed %> /
+      <%=h @test.skipped %> /
+      <%=h @test.failed %> 
+    </td>
+  </tr>
+</table>
+
+<h2>Raw Log Output</h2>
+<pre><%=h @test.log %></pre>

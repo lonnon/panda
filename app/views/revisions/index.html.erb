@@ -9,13 +9,11 @@
 <% @revs.each do |rev| %>
 <tr>
   <td><%=h rev.repo.name %></td>
-  <td><%=h rev.identifier %></td>
+  <td><%= link_to h(rev.identifier), rev %></td>
 
   <% rev.test_runs.each do |test| %>
   <td class="success_<%=h test.success %>">
-     <%=h test.passed %> /
-     <%=h test.skipped %> /
-     <%=h test.failed %> 
+    <%= link_to h("#{test.passed} / #{test.skipped} / #{test.failed}"), test %>
   </td>
   <% end %>
 </tr>

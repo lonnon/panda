@@ -1,0 +1,12 @@
+<h2><%=h @rev.repo.name %> - <%=h @rev.identifier %></h2>
+<table>
+<tr>
+  <th>Date</th><td><%=h @rev.time %></td>
+</tr>
+<tr>
+  <th>Log Message</th><td><pre><%=h @rev.message %></pre></td>
+</tr>
+<tr>
+  <th>By</th><td><%=h @rev.developer %></td>
+</tr>
+</table>

@@ -1,3 +1,6 @@
+a {text-decoration: underline}
+a:hover {background-color: white}
+
 td.success_true {background-color: #00ff00}
 td.success_false {background-color: #ff0000}
 td.success_nil {background-color: #ffff00}
