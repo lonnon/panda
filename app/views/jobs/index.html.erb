@@ -1,0 +1,20 @@
+<h1>Jobs</h1>
+
+<table>
+<tr><th>command</th>
+  <th>state</th>
+  <th>submit time</th>
+  <th>start time</th>
+  <th>finish
+    time</th><th>exit</th></tr>
+<% @jobs.each do |job| %>
+<tr>
+  <td><%=h job.command %></td>
+  <td><%=h job.state %></td>
+  <td><%=h job.submitted_at %></td>
+  <td><%=h job.started_at %></td>
+  <td><%=h job.finished_at %></td>
+  <td><%=h job.exit_status %></td>
+</tr>
+<% end %>
+</table>
