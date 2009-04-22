@@ -38,7 +38,18 @@ def do_build(dir)
         raise "failed to run prebuild"
     end
     
-    IO.popen("make test-xml") {|f|
+    IO.popen("nant clean") {|f|
+        f.lines.each do |line|
+            puts line
+            @@log += line
+        end
+    }
+    
+    if $? != 0
+        raise "failed nant clean"
+    end
+    
+    IO.popen("nant test-xml") {|f|
         f.lines.each do |line|
             puts line
             @@log += line
@@ -57,10 +68,17 @@ def collect_tests(testdir)
         total = 0
         failed = 0
         skipped = 0
-        
+        @@testrun.rawtest = ""
         Dir.foreach(testdir) do |x|
             if x =~ /\.xml$/ 
                 file = "#{testdir}/#{x}"
+                
+                File.open(file, "r") do |f|
+                    while (line = f.gets) 
+                        @@testrun.rawtest += line
+                    end
+                end
+                
                 doc = REXML::Document.new File.new file
                 # puts doc.root.attribute :name ok, a little wierd,
                 # but ruby is strongly typed, and attributes only know
