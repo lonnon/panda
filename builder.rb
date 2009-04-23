@@ -22,6 +22,17 @@ def get_source(rev)
     return dir
 end
 
+def loglines(f)
+    begin
+        while true
+            line = f.readline
+            puts line
+            @@log += line
+        end
+    rescue EOFError
+    end
+end
+
 def do_build(dir)
     # now we do the build
     Dir.chdir(dir)
@@ -30,10 +41,7 @@ def do_build(dir)
     FileUtils.rm_rf testdir
     
     IO.popen("./runprebuild.sh") {|f|
-        f.lines.each do |line|
-            puts line
-            @@log += line
-        end
+        loglines(f)
     }
     
     if $? != 0
@@ -41,10 +49,7 @@ def do_build(dir)
     end
     
     IO.popen("nant clean") {|f|
-        f.lines.each do |line|
-            puts line
-            @@log += line
-        end
+        loglines(f)
     }
     
     if $? != 0
@@ -52,10 +57,7 @@ def do_build(dir)
     end
     
     IO.popen("nant test-xml") {|f|
-        f.lines.each do |line|
-            puts line
-            @@log += line
-        end
+        loglines(f)
     }
 
     collect_tests(testdir)
