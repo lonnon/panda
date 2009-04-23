@@ -4,6 +4,8 @@ require "rubygems"
 require "rscm"
 require "rexml/document"
 
+ENV['PATH'] = "/usr/local/bin:#{ENV['PATH']}"
+
 @@testrun = nil
 @@log = ""
 
