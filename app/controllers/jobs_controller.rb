@@ -4,6 +4,6 @@ class JobsController < ApplicationController
     end
     
     def show
-        @jobs = Bj.table.job.find(params[:id])
+        @job = Bj.table.job.find(params[:id])
     end
 end

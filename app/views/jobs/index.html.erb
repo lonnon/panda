@@ -9,7 +9,7 @@
     time</th><th>exit</th></tr>
 <% @jobs.each do |job| %>
 <tr>
-  <td><%=h job.command %></td>
+  <td><%= link_to  h(job.command), job %></td>
   <td><%=h job.state %></td>
   <td><%=h job.submitted_at %></td>
   <td><%=h job.started_at %></td>
