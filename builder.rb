@@ -5,6 +5,7 @@ require "rscm"
 require "rexml/document"
 
 ENV['PATH'] = "/usr/local/bin:#{ENV['PATH']}"
+ENV['PKG_CONFIG_PATH'] = "/usr/local/lib/pkgconfig:/usr/lib/pkgconfig"
 
 @@testrun = nil
 @@log = ""
