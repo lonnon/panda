@@ -123,6 +123,7 @@ def get_jobid
     job = Bj.table.job.find(:first, :conditions => ["state = ?", "running"])
     if job
         @@testrun.job_id = job.id
+        @@testrun.save
     end
 end
 
