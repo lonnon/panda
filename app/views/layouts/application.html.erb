@@ -2,7 +2,13 @@
 <html>
 
 <head>
-<title><%=h @title %></title>
+<title>
+<% if @title %>
+<%=h @title %>
+<% else %>
+Panda Build System
+<% end %>
+</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="generator" content="Panda 1.0">
 <link rel="stylesheet" href="http://opensimulator.org/skins/opensim/main.css" type="text/css">
@@ -13,6 +19,10 @@
   <%= stylesheet_link_tag 'scaffold' %>
   <%= stylesheet_link_tag 'panda' %>
 
+<% if @rss %>
+<link rel="alternate" type="application/rss+xml" 
+      title="<%=h @title %> Feed" href="<%= @rss %>" />
+<% end %>
 
 </head>
 
