@@ -17,6 +17,12 @@
   </tr>
 </table>
 
+<% job = @test.job %>
+<% if job != nil %>
+<h2>Stderr From Job</h2>
+<pre><%=h job.stderr %></pre>
+<% end %>
+
 <h2>Raw Log Output</h2>
 <pre><%=h @test.log %></pre>
 
