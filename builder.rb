@@ -1,5 +1,6 @@
 #!/usr/bin/env ./script/runner
 
+require "pp"
 require "rubygems"
 require "rscm"
 require "rexml/document"
@@ -40,7 +41,14 @@ def do_build(dir)
     
     testdir = "test-results"
     FileUtils.rm_rf testdir
+
+    puts "Running tests under the following environment:"
+    pp ENV
     
+    IO.popen("mono --version") {|f|
+        loglines(f)
+    }
+
     IO.popen("./runprebuild.sh") {|f|
         loglines(f)
     }
