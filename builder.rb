@@ -35,20 +35,27 @@ def loglines(f)
     end
 end
 
+def env_dump
+    puts ""
+    puts "Running tests under the following environment:"
+    pp ENV
+    puts ""
+    
+    IO.popen("mono --version") {|f|
+        loglines(f)
+    }
+    puts ""
+end
+
 def do_build(dir)
     # now we do the build
     Dir.chdir(dir)
     
     testdir = "test-results"
     FileUtils.rm_rf testdir
-
-    puts "Running tests under the following environment:"
-    pp ENV
     
-    IO.popen("mono --version") {|f|
-        loglines(f)
-    }
-
+    env_dump
+    
     IO.popen("./runprebuild.sh") {|f|
         loglines(f)
     }
