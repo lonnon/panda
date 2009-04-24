@@ -119,6 +119,13 @@ def collect_tests(testdir)
     end
 end
 
+def get_jobid
+    job = Bj.table.job.find(:first, :conditions => ["state = ?", "running"])
+    if job
+        @@testrun.job_id = job.id
+    end
+end
+
 def main
     rev = Revision.find(ARGV[0])
     @@testrun = rev.test_runs.build
@@ -126,6 +133,7 @@ def main
     @@testrun.save
     begin
         dir = get_source(rev)
+        get_jobid
         pass = do_build(dir)
         @@testrun.success = true
         @@testrun.log = @@log
