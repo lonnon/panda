@@ -139,6 +139,9 @@ def main
         @@testrun.success = true
         @@testrun.log = @@log
         @@testrun.save
+        # if we are succesful, remove the builddir
+        FileUtils.rm_rf(dir, :secure => true, :force => true)
+        
     rescue => e
         puts e
         @@testrun.success = false
