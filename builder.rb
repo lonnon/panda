@@ -109,7 +109,7 @@ def collect_tests(testdir)
                 skipped += doc.root.attribute("not-run").to_s.to_i
             end
         end
-        @@testrun.passed = total - failed - skipped 
+        @@testrun.passed = total - failed
         @@testrun.failed = failed
         @@testrun.skipped = skipped
         @@testrun.save
