@@ -72,7 +72,7 @@ def do_build(dir)
         raise "failed nant clean"
     end
     
-    IO.popen("nant test-xml") {|f|
+    IO.popen("ulimit -c 2000000000 && nant test-xml") {|f|
         loglines(f)
     }
 
