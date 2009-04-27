@@ -18,3 +18,44 @@ h1 {
     padding: 10px 20px;
     background-color: #71C900;
 }
+
+div.padded {
+    font-weight: bold;
+    font-size: 1.5em;
+    padding: 15px 20px;
+}
+
+.test_fail, .test_fail a {
+    color: red;
+}
+
+.test_success, .test_succes a {
+    color: green;
+}
+
+.test_run {
+    color: blue;
+}
+
+tr.test_fail, tr.test_fail a {
+    color: black;
+    background-color: red;
+}
+
+tr.test_success, tr.test_success a {
+    color: white;
+    background-color: green;
+}
+
+td.spacer {
+    background-color: white;
+}
+
+table.builds td {
+    padding: 2px 10px;
+}
+
+.revision {
+    font-size: 1.2em;
+    font-weight: bold;
+}
