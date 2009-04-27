@@ -19,10 +19,12 @@ def main
             cmd = job.command
             
             pid = pidofmono
-            if pid 
+            begin
                 Process.kill(2, pid)
                 sleep 5
                 Process.kill(9, pid)
+            rescue => e
+                # don't really care
             end
             Bj.sumbit cmd
         end
