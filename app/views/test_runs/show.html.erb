@@ -1,5 +1,5 @@
 <h1>Test Run <%=h @test.id %></h1>
-<table>
+<table class="testrun">
   <tr>
     <td>Repository</td><td><%=h @test.revision.repo.name %></td>
   </tr>
@@ -8,14 +8,32 @@
       <%= link_to @test.revision.identifier, @test.revision %></td>
   </tr>
   <tr>
-    <td>Results (P/S/F)</td>
-    <td class="success_<%=h @test.success %>">
-      <%=h @test.passed %> /
-      <%=h @test.skipped %> /
-      <%=h @test.failed %> 
-    </td>
+    <td>Author</td>
+    <td><%=h @test.revision.developer %></td>
+  </tr>
+  <tr>
+    <td>Commit Message</td>
+    <td><%= textilize(h(@test.revision.message)) %></td>
   </tr>
 </table>
+<h2>Results</h2>
+<table>
+  
+<tr><td><strong>Total</strong></td>
+  <td><%= @test.passed %></td>
+  <td><%= @test.skipped %></td>
+  <td><%= @test.failed %></td>
+</table>
+  
+<!--   <tr> -->
+<!--     <td>Results (P/S/F)</td> -->
+<!--     <td class="success_<%=h @test.success %>"> -->
+<!--       <%=h @test.passed %> / -->
+<!--       <%=h @test.skipped %> / -->
+<!--       <%=h @test.failed %>  -->
+<!--     </td> -->
+<!--   </tr> -->
+<!-- </table> -->
 
 <% job = @test.job %>
 <% if job != nil %>
