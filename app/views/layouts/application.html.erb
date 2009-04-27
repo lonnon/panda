@@ -29,14 +29,22 @@ Panda Build System
 <body>
   <div id="headerArea3" class="mainPadding">
     <div id="headerArea3Logo">
-<div id="headerText">OpenSim Panda Build System</div></div>
+      <div id="headerText">OpenSim Panda Build System</div>
     </div>
-
-<div class="daygroup">
-  <%= yield %>
-
-</div>
-
+  </div>
+  <div class="tabs">
+    <%= link_to "Home", :controller => :overview %> | 
+    <%= link_to "Revisions", :controller => :revisions %> |
+    <%= link_to "Test Runs", :controller => :test_runs %> |
+    <%= link_to "Jobs", :controller => :jobs %> 
+  </div>
+  
+  <div class="daygroup">
+    
+    <%= yield %>
+    
+  </div>
+  
 </div>
 
 
