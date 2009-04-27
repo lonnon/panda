@@ -35,16 +35,19 @@ div.padded {
 
 .test_run {
     color: blue;
+    white-space: nowrap;
 }
 
 tr.test_fail, tr.test_fail a {
     color: black;
     background-color: red;
+    white-space: nowrap;
 }
 
 tr.test_success, tr.test_success a {
     color: white;
     background-color: green;
+    white-space: nowrap;
 }
 
 td.spacer {
