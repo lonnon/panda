@@ -44,6 +44,10 @@ tr.test_fail, tr.test_fail a {
     white-space: nowrap;
 }
 
+tr.test_result {
+    white-space: nowrap;
+}
+
 tr.test_success, tr.test_success a {
     color: white;
     background-color: green;

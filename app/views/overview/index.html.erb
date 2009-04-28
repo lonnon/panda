@@ -29,13 +29,13 @@
 
    <% rev.test_runs.each do |test| %>
    <% if test.success == false %>
-   <tr class="test_fail">
+   <tr class="test_result">
      <td class="spacer"></td>
-     <td>Build Failed</td>
+     <td><%= image_tag "reddot-small.png" %> Build Failed</td>
     <% elsif test.success == true %>
-   <tr class="test_success">
+   <tr class="test_result">
      <td class="spacer"></td>
-     <td>Build Succeeded</td>
+     <td><%= image_tag "greendot-small.png" %> Build Succeeded</td>
      <% else %>
    <tr class="test_run">
      <td class="spacer"></td>
