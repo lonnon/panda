@@ -13,12 +13,19 @@
   </tr>
   <tr>
     <td>Commit Message</td>
-    <td><%= textilize(h(@test.revision.message)) %></td>
+    <td><%= textilize_without_paragraph(h(@test.revision.message)) %></td>
   </tr>
 </table>
 <h2>Results</h2>
 <table>
-  
+               <% @test.details.sort_by {|d| d["name"]}.each do |detail| %>
+<tr>
+  <td><%=h detail["name"] %></td>
+  <td><%= detail["total"].to_i -  detail["failures"].to_i %></td>
+  <td><%= detail["not-run"] %></td>
+  <td><%= detail["failures"] %></td>
+</tr>
+<% end %> 
 <tr><td><strong>Total</strong></td>
   <td><%= @test.passed %></td>
   <td><%= @test.skipped %></td>
