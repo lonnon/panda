@@ -1,0 +1,79 @@
+= Welcome to Panda
+
+Panda is a continous integration system designed for use by the
+OpenSim project, though it can be used for other tasks as well.
+
+== Design Points
+Panda has a few design points in mind.  Not all are implemented at
+this point, but it is where the project is headed.
+
+Panda should:
+* support scm revisions as a first order object
+* support unit testing as a first order opperation
+* make it easy to get raw data back out
+* be able to run tests for the same revision on different environments
+* not consume all the memory on a machine
+
+The design points have lead to the following decisions:
+* the use of rscm for scm integration.  Currently only subversion is
+supported, but git support is a high priority.
+* an object tree that includes scm repositories, scm revisions, and
+test runs in logical ways.
+
+Because I'm a big fan of ruby on rails, this is a ruby on rails
+application.  Building the web interface was easier and faster that
+way, and ruby is perfectly addequate as a job runner.
+
+= Installation
+
+== Requirements
+
+* Ruby on Rails 2.2.2.  This may work on other versions, but it isn't
+  tested.
+* Passenger >= 2.1.2.  http://modrails.com.  It is probably possible
+  to deploy on other environments, but I use passenger, so you should
+  too.
+* MySQL 5.x.  Background job doesn't like sqlite, and I didn't debug
+  why, run this application on MySQL
+* my rscm build (it has fixes for linux).  For this:
+
+git clone git://github.com/sdague/rscm.git
+cd rscm
+rake gem
+sudo gem install ./pkg/rscm-0.5.2.gem
+
+== Install Procedure
+
+Install everything above.  Describing that further is outside the
+scope of this document.
+
+git clone git://github.com/sdague/panda.git
+cd panda
+mkdir tmp
+chmod 777 tmp
+cp config/database.yml.example config/database.yml
+edit config/database.yml (set user/db/password as appropriate)
+sudo rake gems:install
+rake db:migrate (sets up database schema)
+
+Then deploy that directory as a passenger application (go read
+http://modrails.com for instructions).
+
+Next, set up a crontab for the running, collector, and cleaner.  There
+is an example in crontab.example in this repository.
+
+Lastly, you need to create a repository definition.  There is
+currently no admin interface to panda, so you need to do this in the
+rails console.  Do this via:
+
+RAILS_ENV=production ./script/console 
+>> r = Repo.new
+>> r.name = "some name"
+>> r.rtype = "svn"
+>> r.url = "svn url"
+>> r.builddir = "/tmp"
+>> r.save
+
+At this point the scheduled collector will start collecting repository
+revisions and build the most recent one found.
+

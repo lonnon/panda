@@ -1,0 +1,4 @@
+*/15 * * * *   bj run --forever --rails_env=production --rails_root=/var/www/panda.opensimulator.org
+* * * * * cd /var/www/panda.opensimulator.org && RAILS_ENV=production ./collector.rb > /dev/null
+*/5 * * * * cd /var/www/panda.opensimulator.org && RAILS_ENV=production ./cleaner.rb 
+
