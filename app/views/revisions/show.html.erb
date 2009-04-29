@@ -1,12 +1,11 @@
 <h2><%=h @rev.repo.name %> - <%=h @rev.identifier %></h2>
-<table>
+<table class="basetable">
 <tr>
   <th>Date</th><td><%=h @rev.time %></td>
 </tr>
 <tr>
-  <th>Log Message</th><td><pre><%=h @rev.message %></pre></td>
-</tr>
+  <th>Developer</th><td><%=h @rev.developer %></td>
 <tr>
-  <th>By</th><td><%=h @rev.developer %></td>
+  <th>Log Message</th><td><%=  textilize_without_paragraph(h(@rev.message)) %></pre></td>
 </tr>
 </table>

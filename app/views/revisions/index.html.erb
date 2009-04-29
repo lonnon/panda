@@ -1,23 +1,39 @@
 <% @rss = url_for :controller => "test_runs", :action => "index", :format => "rss" %>
 <h1>Recent Revisions</h1>
 
-<table>
-<tr>
-<th>Repo</th>
-<th>Revision</th>
-<th colspan="3">Test Runs (Passed/Skipped/Failed)</th>
-</tr>
-<% @revs.each do |rev| %>
-<tr>
-  <td><%=h rev.repo.name %></td>
-  <td><%= link_to h(rev.identifier), rev %></td>
+ <table class="revisions" cellspacing="0">
+   <% @revs.each do |rev| %>
+   <% if not @last or @last.time.to_date != rev.time.to_date %>
+   <tr class="day"><td colspan="6"><%=h rev.time.strftime("%A %B %d, %Y") %></td></tr>
+   <% @last = rev %>
+   <% end %>
+   <tr class="revision">
+     <td><%=h rev.repo.name %></td>
+     <td><%= link_to rev.identifier, rev %></td>
+     <td><%=h rev.developer %></td>
+     <td colspan="3"><%= textilize_without_paragraph(h(rev.message))
+%></td>
+   </tr>
 
-  <% rev.test_runs.each do |test| %>
-  <td class="success_<%=h test.success %>">
-    <%= link_to h("#{test.passed} / #{test.skipped} / #{test.failed}"), test %>
-  </td>
+   <% rev.test_runs.reverse.each do |test| %>
+   <% if test.success == false %>
+   <tr class="test_result">
+     <td class="spacer"></td>
+     <td><%= image_tag "reddot-small.png" %> Build Failed</td>
+    <% elsif test.success == true %>
+   <tr class="test_result">
+     <td class="spacer"></td>
+     <td><%= image_tag "greendot-small.png" %> Build Succeeded</td>
+     <% else %>
+   <tr class="test_run">
+     <td class="spacer"></td>
+     <td>Build in Progress</td>
   <% end %>
-</tr>
-
+  <td width="1px"><%= link_to "Run #{test.id}", test %></td>
+  <td width="1px"><%= "#{test.passed} / #{test.skipped} / #{test.failed}" %></td>
+  <td></td>
+  <td></td>
+  </tr>
+  <% end %>
 <% end %>
 </table>

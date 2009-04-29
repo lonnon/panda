@@ -62,6 +62,19 @@ table.builds td {
     padding: 2px 10px;
 }
 
+
+table.revisions td {
+    padding: 2px 10px;
+}
+
+.revisions .day td {
+    background-color: black;
+    line-height: 1.8em;
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
 .revision td {
     border-top: solid 1px black;
     font-size: 1.1em;
@@ -71,10 +84,13 @@ table.builds td {
 .revision {
     border-top: solid 1px black;
     background-color: #eeeeee;
-    vertical-align: top;
-    font-size: 1.2em;
 }
 
-.testrun tr {
+tr {
     vertical-align: top;
 }
+
+.basetable th {
+    text-align: left;
+}
+    
