@@ -31,7 +31,7 @@
      <td colspan="4"><%=h rev.developer %> - <%=h rev.message %></td>
    </tr>
 
-   <% rev.test_runs.each do |test| %>
+   <% rev.test_runs.reverse.each do |test| %>
    <% if test.success == false %>
    <tr class="test_result">
      <td class="spacer"></td>
