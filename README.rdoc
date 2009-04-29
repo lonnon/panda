@@ -37,24 +37,24 @@ way, and ruby is perfectly addequate as a job runner.
   why, run this application on MySQL
 * my rscm build (it has fixes for linux).  For this:
 
-git clone git://github.com/sdague/rscm.git
-cd rscm
-rake gem
-sudo gem install ./pkg/rscm-0.5.2.gem
+ git clone git://github.com/sdague/rscm.git
+ cd rscm
+ rake gem
+ sudo gem install ./pkg/rscm-0.5.2.gem
 
 == Install Procedure
 
 Install everything above.  Describing that further is outside the
 scope of this document.
 
-git clone git://github.com/sdague/panda.git
-cd panda
-mkdir tmp
-chmod 777 tmp
-cp config/database.yml.example config/database.yml
-edit config/database.yml (set user/db/password as appropriate)
-sudo rake gems:install
-rake db:migrate (sets up database schema)
+ git clone git://github.com/sdague/panda.git 
+ cd panda
+ mkdir tmp
+ chmod 777 tmp
+ cp config/database.yml.example config/database.yml
+ edit config/database.yml (set user/db/password as appropriate)
+ sudo rake gems:install
+ rake db:migrate (sets up database schema)
 
 Then deploy that directory as a passenger application (go read
 http://modrails.com for instructions).
@@ -66,13 +66,13 @@ Lastly, you need to create a repository definition.  There is
 currently no admin interface to panda, so you need to do this in the
 rails console.  Do this via:
 
-RAILS_ENV=production ./script/console 
->> r = Repo.new
->> r.name = "some name"
->> r.rtype = "svn"
->> r.url = "svn url"
->> r.builddir = "/tmp"
->> r.save
+ RAILS_ENV=production ./script/console 
+ >> r = Repo.new
+ >> r.name = "some name"
+ >> r.rtype = "svn" 
+ >> r.url = "svn url" 
+ >> r.builddir = "/tmp"
+ >> r.save
 
 At this point the scheduled collector will start collecting repository
 revisions and build the most recent one found.
