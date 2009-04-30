@@ -33,6 +33,10 @@ class TestRun < ActiveRecord::Base
     
     private 
     def to_rexml
-        REXML::Document.new "<xml>#{rawtest.gsub(/<\?xml.*?\?>/, '')}</xml>"
+        if rawtest
+            return REXML::Document.new "<xml>#{rawtest.gsub(/<\?xml.*?\?>/, '')}</xml>"
+        else
+            return REXML::Document.new "<xml></xml>"
+        end
     end
 end
