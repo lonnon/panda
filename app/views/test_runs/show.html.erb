@@ -18,7 +18,7 @@
 </table>
 <h2>Results</h2>
 <table>
-               <% @test.details.sort_by {|d| d["name"]}.each do |detail| %>
+  <% @test.details.sort_by {|d| d["name"]}.each do |detail| %>
 <tr>
   <td><%=h detail["name"] %></td>
   <td><%= detail["total"].to_i -  detail["failures"].to_i %></td>

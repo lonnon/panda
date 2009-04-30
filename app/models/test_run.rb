@@ -23,8 +23,10 @@ class TestRun < ActiveRecord::Base
             res.attributes.each do |k, v|
                 data[k] = v
             end
-            data["name"].gsub!(/^.*\//, '')
-            results << data
+            if data["name"]
+                data["name"].gsub!(/^.*\//, '')
+                results << data
+            end
         end
         return results
     end
