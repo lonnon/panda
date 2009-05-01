@@ -1,10 +1,11 @@
 class RevisionsController < ApplicationController
     def index
-        @revs = Revision.find(:all, :limit => 20, :order => "identifier desc")
+        @repos = Repo.find(:all)
+        # @revs = Revision.find(:all, :limit => 20, :order => "time desc")
         
         respond_to do |format|
             format.html
-            format.xml { render :xml => @revs }
+            format.xml { render :xml => @repos }
         end
     end
     

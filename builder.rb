@@ -18,8 +18,12 @@ def get_source(rev)
     dir = "#{rev.repo.builddir}/#{rev.repo.name}-#{rev.identifier}"
     repo.checkout_dir = dir
 
-    # this is a little weird, but to get the right rev we need to do time based checkouts
-    repo.checkout(rev.time)
+    # time based checkouts for subversion, identifiers for git
+    if repo.is_a?(RSCM::Git)
+        repo.checkout(rev.identifier)
+    else
+        repo.checkout(rev.time)
+    end
     
     return dir
 end
