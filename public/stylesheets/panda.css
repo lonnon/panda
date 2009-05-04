@@ -25,6 +25,14 @@ div.padded {
     padding: 15px 20px;
 }
 
+.result_fail {
+    background-color: red;
+}
+
+.result_fail .failed {
+    font-weight: bold;
+}
+
 .test_fail, .test_fail a {
     color: red;
 }

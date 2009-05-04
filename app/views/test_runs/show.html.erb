@@ -18,12 +18,17 @@
 </table>
 <h2>Results</h2>
 <table>
+  <tr><th>Assembly Name</th><th>Passed</th><th>Skipped</th><th>Failed</th></tr>
   <% @test.details.sort_by {|d| d["name"]}.each do |detail| %>
-<tr>
+  <% if detail["failures"].to_i > 0 %>
+  <tr class="result_fail">
+    <% else %>
+    <tr>
+      <% end %>
   <td><%=h detail["name"] %></td>
   <td><%= detail["total"].to_i -  detail["failures"].to_i %></td>
   <td><%= detail["not-run"] %></td>
-  <td><%= detail["failures"] %></td>
+  <td class="failed"><%= detail["failures"] %></td>
 </tr>
 <% end %> 
 <tr><td><strong>Total</strong></td>
@@ -52,4 +57,4 @@
 <pre><%=h @test.log %></pre>
 
 <h2>Raw Test Output</h2>
-<pre><%=h @test.rawtest %></pre>
+<pre><%= h(@test.rawtest).gsub(/(\&lt\;failure.*?\/failure&gt;)/, "<b>#{$1}</b>") %></pre>
