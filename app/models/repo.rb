@@ -16,8 +16,8 @@ class Repo < ActiveRecord::Base
         return nil
     end
     
-    def gather_revs
-        revs = rscm.revisions(1.day.ago)
+    def gather_revs(since = 1.day.ago)
+        revs = rscm.revisions(since)
         @latest = nil
         
         revs.each do |rev|
