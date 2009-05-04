@@ -57,4 +57,4 @@
 <pre><%=h @test.log %></pre>
 
 <h2>Raw Test Output</h2>
-<pre><%= h(@test.rawtest).gsub(/(\&lt\;failure.*?\/failure&gt;)/m, "<b>#{$1}</b>") %></pre>
+<pre><%= h(@test.rawtest).gsub(/(\&lt\;failure.*?\/failure&gt;)/m, "<b>\1</b>") %></pre>
