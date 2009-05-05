@@ -5,7 +5,8 @@ xml.rss :version => "2.0" do
         xml.description "A list of recent builds"
         xml.link formatted_test_runs_url(:rss)
         
-        for test in @tests
+        # reverse this so the last items come at the end
+        for test in @tests.reverse
             success = "FAILED"
             if test.success
                 success = "PASSED"

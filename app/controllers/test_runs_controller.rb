@@ -6,9 +6,7 @@ class TestRunsController < ApplicationController
         respond_to do |format|
             format.html
             format.xml {render :xml => @tests}
-            format.rss {
-                @tests = @tests.reverse
-            }
+            format.rss 
         end
     end
     
