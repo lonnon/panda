@@ -17,7 +17,7 @@ class Repo < ActiveRecord::Base
     end
     
     def gather_revs(since = 1.day.ago)
-        revs = rscm.revisions(since)
+        revs = rscm.revisions.sort!(since)
         @latest = nil
         
         revs.each do |rev|
