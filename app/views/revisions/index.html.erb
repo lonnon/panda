@@ -5,7 +5,7 @@
 <h1>Recent Revisions for <%=h repo.name %></h1>
    <% @last = nil %>
  <table class="revisions" cellspacing="0">
-   <% repo.revisions.find(:all, :limit => 20, :order => "time desc").each do |rev| %>
+   <% repo.revisions.find(:all, :limit => 40, :order => "time desc").each do |rev| %>
    <% if not @last or @last.time.to_date != rev.time.to_date %>
    <tr class="day"><td colspan="6"><%=h rev.time.strftime("%A %B %d, %Y") %></td></tr>
    <% @last = rev %>
