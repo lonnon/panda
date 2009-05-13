@@ -2,7 +2,6 @@ class TestRun < ActiveRecord::Base
     belongs_to :revision
     require "rexml/document"
     
-    
     def job
         if not job_id
             return nil

@@ -2,7 +2,7 @@
 
 
 <div class="padded">Latest Build Results: 
-<% if @job.state == "running" %>
+<% if job_running?(@job) %>
  <span class="test_run">
             Currently running <%= link_to "job #{@job.id}", 
                 :controller => :jobs, :action => :show, :id => @job.id %>
