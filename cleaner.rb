@@ -14,7 +14,7 @@ def main
     jobs = Bj.table.job.find(:all)
     
     jobs.each do |job|
-        if (job.state == "running") and (job.started_at < 15.minutes.ago)
+        if (job.state == "running") and (job.started_at < 30.minutes.ago)
             # capture job so we can restart it
             cmd = job.command
             
