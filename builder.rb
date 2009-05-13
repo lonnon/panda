@@ -15,8 +15,7 @@ def get_source(rev)
     # get the repo object
     repo = rev.repo.rscm
     
-    dir = "#{rev.repo.builddir}/#{rev.repo.name}-#{rev.identifier}"
-    repo.checkout_dir = dir
+    repo.checkout_dir = rev.builddir
 
     # time based checkouts for subversion, identifiers for git
     if repo.is_a?(RSCM::Git)
@@ -25,7 +24,7 @@ def get_source(rev)
         repo.checkout(rev.time)
     end
     
-    return dir
+    return rev.builddir
 end
 
 def loglines(f)

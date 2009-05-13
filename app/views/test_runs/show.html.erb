@@ -36,7 +36,21 @@
   <td><%= @test.skipped %></td>
   <td><%= @test.failed %></td>
 </table>
-  
+
+<% @cores = list_cores(@test.revision) %>
+<% if @cores.size > 0 %>
+<h2>Core Dumps</h2>
+<ul>
+<% @cores.each do |core| %>
+<li><%= link_to f, :controller => :cores, :action => :show, 
+:id => @test.revision.id, :corefile => f %></li>
+<% end %>
+</ul>
+<% end %>
+
+
+
+
 <!--   <tr> -->
 <!--     <td>Results (P/S/F)</td> -->
 <!--     <td class="success_<%=h @test.success %>"> -->
