@@ -8,6 +8,7 @@
                 :controller => :jobs, :action => :show, :id => @job.id %>
  </span>
  <% else %>
+ <% @test %>
  <% if @test.success %>
  <span class="test_success" %>
    Build of <%=h @test.revision.identifier %> was 
@@ -18,6 +19,7 @@
    Build of <%=h @test.revision.identifier %> 
    <%= link_to "Failed", @test %>
  </span>
+ <% end %>
  <% end %>
  <% end %>   
  </div>
