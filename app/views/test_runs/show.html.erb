@@ -42,8 +42,8 @@
 <h2>Core Dumps</h2>
 <ul>
 <% @cores.each do |core| %>
-<li><%= link_to f, :controller => :cores, :action => :show, 
-:id => @test.revision.id, :corefile => f %></li>
+<li><%= link_to core, :controller => :cores, :action => :show, 
+:id => @test.revision.id, :corefile => core %></li>
 <% end %>
 </ul>
 <% end %>
