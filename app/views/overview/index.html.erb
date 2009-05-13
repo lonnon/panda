@@ -8,7 +8,7 @@
                 :controller => :jobs, :action => :show, :id => @job.id %>
  </span>
  <% else %>
- <% @test %>
+ <% if @test %>
  <% if @test.success %>
  <span class="test_success" %>
    Build of <%=h @test.revision.identifier %> was 
