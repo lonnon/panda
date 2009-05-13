@@ -4,6 +4,10 @@ class TestRun < ActiveRecord::Base
     
     
     def job
+        if not job_id
+            return nil
+        end
+        
         begin
             return Bj.table.job.find(job_id)
         rescue => e
