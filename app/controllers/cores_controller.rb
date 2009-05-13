@@ -1,7 +1,7 @@
 class CoresController < ApplicationController
   def show
-      rev = Revision.find(param[:id])
-      core = param[:corefile]
+      rev = Revision.find(params[:id])
+      core = params[:corefile]
       corefile = "#{rev.builddir}/#{core}"
       if core !~ /^core\./ or not File.exists?(corefile)
           render :nothing => true, :status => 404
