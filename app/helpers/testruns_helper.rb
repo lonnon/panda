@@ -1,7 +1,7 @@
 module TestrunsHelper
     def list_cores(rev)
         cores = []
-        if Dir.exists?(rev.builddir)
+        if Dir.exist?(rev.builddir)
             Dir.foreach(rev.builddir) do |f|
                 if f =~ /^core.\d+/
                     cores << f
