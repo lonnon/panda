@@ -3,7 +3,9 @@ class CoresController < ApplicationController
       rev = Revision.find(params[:id])
       core = params[:corefile]
       corefile = "#{rev.builddir}/#{core}"
-      if core !~ /^core\./ or not File.exists?(corefile)
+      # these checks are important, because otherwise any arbitrary
+      # file could be served out of your fs
+      if core !~ /^core\.\d+$/ or not File.exists?(corefile)
           render :nothing => true, :status => 404
           return true
       end
