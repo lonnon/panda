@@ -11,6 +11,8 @@ ENV['PKG_CONFIG_PATH'] = "/usr/local/lib/pkgconfig:/usr/lib/pkgconfig"
 @@testrun = nil
 @@log = ""
 
+fd2 = fd1
+
 def get_source(rev)
     # get the repo object
     repo = rev.repo.rscm
@@ -75,7 +77,7 @@ def do_build(dir)
         raise "failed nant clean"
     end
     
-    IO.popen("ulimit -c 2000000000 && nant test-xml") {|f|
+    IO.popen("ulimit -c 2000000000 && nant test-xml ") {|f|
         loglines(f)
     }
 
