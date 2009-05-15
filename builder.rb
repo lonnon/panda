@@ -139,6 +139,7 @@ end
 def main
     rev = Revision.find(ARGV[0])
     @@testrun = rev.test_runs.build
+    @@testrun.log = ""
     # this creates the start time
     @@testrun.save
     begin
