@@ -48,26 +48,7 @@
 </ul>
 <% end %>
 
-
-
-
-<!--   <tr> -->
-<!--     <td>Results (P/S/F)</td> -->
-<!--     <td class="success_<%=h @test.success %>"> -->
-<!--       <%=h @test.passed %> / -->
-<!--       <%=h @test.skipped %> / -->
-<!--       <%=h @test.failed %>  -->
-<!--     </td> -->
-<!--   </tr> -->
-<!-- </table> -->
-
-<% job = @test.job %>
-<% if job != nil %>
-<h2>Stderr From Job</h2>
-<pre><%=h job.stderr %></pre>
-<% end %>
-
-<h2>Raw Log Output</h2>
+<h2>Raw Log Output (stdout &amp; stderr)</h2>
 <pre><%=h @test.log %></pre>
 
 <h2>Raw Test Output</h2>

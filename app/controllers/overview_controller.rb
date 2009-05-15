@@ -2,7 +2,11 @@ class OverviewController < ApplicationController
     def index
         @test = TestRun.find(:first, :conditions => ["job_id is not null"], :order => "id desc")
         if @test
-            @job = @test.job
+            begin 
+                @job = Bj.table.job.find(@test.job_id)
+            rescue => e
+                # we didn't find the job, who cares
+            end
         end
         @revs = []
         Repo.find(:all).each do |repo|

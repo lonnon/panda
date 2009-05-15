@@ -2,22 +2,6 @@ class TestRun < ActiveRecord::Base
     belongs_to :revision
     require "rexml/document"
     
-    def job
-        if not job_id
-            return nil
-        end
-        
-        begin
-            return Bj.table.job.find(job_id)
-        rescue => e
-            begin 
-                return Bj.table.job_archive(job_id)
-            rescue => e
-            end
-            return nil
-        end
-    end
-    
     def details
         doc = to_rexml
         results = Array.new
