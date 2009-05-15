@@ -11,8 +11,6 @@ ENV['PKG_CONFIG_PATH'] = "/usr/local/lib/pkgconfig:/usr/lib/pkgconfig"
 @@testrun = nil
 @@log = ""
 
-fd2 = fd1
-
 def get_source(rev)
     # get the repo object
     repo = rev.repo.rscm
@@ -46,7 +44,7 @@ def env_dump
     pp ENV
     puts ""
     
-    IO.popen("mono --version") {|f|
+    IO.popen("mono --version 2>&1") {|f|
         loglines(f)
     }
     puts ""
@@ -61,7 +59,7 @@ def do_build(dir)
     
     env_dump
     
-    IO.popen("./runprebuild.sh") {|f|
+    IO.popen("./runprebuild.sh 2>&1") {|f|
         loglines(f)
     }
     
@@ -69,7 +67,7 @@ def do_build(dir)
         raise "failed to run prebuild"
     end
     
-    IO.popen("nant clean") {|f|
+    IO.popen("nant clean 2>&1") {|f|
         loglines(f)
     }
     
@@ -77,7 +75,7 @@ def do_build(dir)
         raise "failed nant clean"
     end
     
-    IO.popen("ulimit -c 2000000000 && nant test-xml ") {|f|
+    IO.popen("ulimit -c 2000000000 && nant test-xml 2>&1") {|f|
         loglines(f)
     }
 
