@@ -7,7 +7,7 @@ repos.each do |repo|
     puts "Latest = #{latest}"
     
     rev = Revision.find_by_identifier(latest)
-    
+
     if latest != nil
         puts "Bj.submit './builder.rb #{rev.id}'"
         Bj.submit "./builder.rb #{rev.id}"
