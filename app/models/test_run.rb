@@ -1,6 +1,11 @@
 class TestRun < ActiveRecord::Base
     belongs_to :revision
     require "rexml/document"
+
+    def before_create
+        log = ""
+        rawtest = ""
+    end
     
     def details
         doc = to_rexml
