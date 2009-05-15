@@ -29,13 +29,19 @@ end
 
 def loglines(f)
     begin
+        count = 0
         while true
             line = f.readline
             puts line
-            @@log += line
+            @@testrun.log += line
+            count += 1
+            if (count % 10) == 0
+                @@testrun.save
+            end
         end
     rescue EOFError
     end
+    @@testrun.save
 end
 
 def env_dump
@@ -140,7 +146,6 @@ def main
         get_jobid
         pass = do_build(dir)
         @@testrun.success = true
-        @@testrun.log = @@log
         @@testrun.save
         # if we are succesful, remove the builddir
         FileUtils.rm_rf(dir, :secure => true)
@@ -148,7 +153,6 @@ def main
     rescue => e
         puts e
         @@testrun.success = false
-        @@testrun.log = @@log
         @@testrun.save
     end
 end
