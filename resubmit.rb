@@ -9,6 +9,7 @@ repos.each do |repo|
     rev = Revision.find_by_identifier(latest)
 
     if latest != nil
+        FileUtils.rm_rf(rev.builddir)
         puts "Bj.submit './builder.rb #{rev.id}'"
         Bj.submit "./builder.rb #{rev.id}"
     end
