@@ -68,6 +68,7 @@ def do_run(dir, cmd)
     env_dump
     
     cmd.lines.each do |cmdline|
+        # the strip is really important, otherwise this doesn't do what you think it will do
         IO.popen("#{cmdline.strip} 2>&1") do |output|
             loglines output
         end
