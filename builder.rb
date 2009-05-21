@@ -142,8 +142,10 @@ def main
     # this creates the start time
     @@testrun.save
     begin
-        dir = get_source(rev)
+        # first, back reference ourselves
         get_jobid
+        
+        dir = get_source(rev)
         
         testdir = "#{dir}/test-results"
         clear_tests(testdir)
