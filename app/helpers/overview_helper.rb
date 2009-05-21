@@ -30,7 +30,7 @@ module OverviewHelper
         if test.starttime and test.endtime
             return test.endtime - test.starttime
         else
-            "unknown"
+            return "unknown"
         end
     end
 end
