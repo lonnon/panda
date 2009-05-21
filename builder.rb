@@ -147,13 +147,13 @@ def main
         
         dir = get_source(rev)
         
-        testdir = "#{dir}/test-results"
-        clear_tests(testdir)
+        @testdir = "#{dir}/test-results"
+        clear_tests(@testdir)
       
         @@testrun.starttime = DateTime.now
       
         pass = do_run(dir, @@buildcmd)
-        collect_tests(testdir)
+        collect_tests(@testdir)
         
         @@testrun.endtime = DateTime.now
         
@@ -165,7 +165,7 @@ def main
     rescue => e
         puts e
         @@testrun.endtime = DateTime.now
-        collect_tests(testdir)
+        collect_tests(@testdir)
         @@testrun.success = false
         @@testrun.save
     end
