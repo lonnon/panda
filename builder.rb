@@ -78,12 +78,6 @@ def do_run(dir, cmd)
             raise failmsg
         end
     end
-   
-    collect_tests(testdir)
-    
-    if $? != 0
-        raise "failed to run build"
-     end
 end
 
 def clear_tests(testdir)
