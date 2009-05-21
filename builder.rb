@@ -68,7 +68,7 @@ def do_run(dir, cmd)
     env_dump
     
     cmd.lines.each do |cmdline|
-        IO.popen("#{cmdline} 2>&1") do |output|
+        IO.popen("#{cmdline.strip} 2>&1") do |output|
             loglines output
         end
         # we failed during the command
