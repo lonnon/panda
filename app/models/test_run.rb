@@ -8,15 +8,15 @@ class TestRun < ActiveRecord::Base
     end
     
     def checkouttime
-        if created_at and startime
-            return startime - created_at
+        if created_at and starttime
+            return starttime - created_at
         else
             return 0
         end
     end
     
     def runtime
-        if startime and endtime
+        if starttime and endtime
             return endtime - starttime
         else
             return 0
