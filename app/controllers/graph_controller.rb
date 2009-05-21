@@ -25,12 +25,16 @@ class GraphController < ApplicationController
         x_labels.labels = labels
         x = XAxis.new
         x.set_labels(x_labels)
+        y = YAxis.new
+        y.set_range(0,600,60)
 
+        
         bar.set_values(values)
 
         chart = OpenFlashChart.new
         chart.set_title(title)
         chart.x_axis = x 
+        chart.y_axis = y
         chart.add_element(bar)
         render :text => chart.to_s
     end
