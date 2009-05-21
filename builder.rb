@@ -10,6 +10,12 @@ ENV['PKG_CONFIG_PATH'] = "/usr/local/lib/pkgconfig:/usr/lib/pkgconfig"
 
 @@testrun = nil
 @@log = ""
+@@buildcmd = <<BUILD
+./runprebuild.sh
+nant clean
+nant test-xml
+BUILD
+
 
 def get_source(rev)
     # get the repo object
@@ -56,41 +62,34 @@ def env_dump
     puts ""
 end
 
-def do_build(dir)
+def do_run(dir, cmd)
     # now we do the build
     Dir.chdir(dir)
-    
-    testdir = "test-results"
-    FileUtils.rm_rf testdir
-    
     env_dump
     
-    IO.popen("./runprebuild.sh 2>&1") {|f|
-        loglines(f)
-    }
-    
-    if $? != 0
-        raise "failed to run prebuild"
+    cmd.lines.each do |cmdline|
+        IO.popen("#{cmdline} 2>&1") do |output|
+            loglines output
+        end
+        # we failed during the command
+        if $? != 0
+            failmsg = "FAILED on command '#{cmdline}'"
+            @@testrun.log += failmsg
+            raise failmsg
+        end
     end
-    
-    IO.popen("nant clean 2>&1") {|f|
-        loglines(f)
-    }
-    
-    if $? != 0
-        raise "failed nant clean"
-    end
-    
-    IO.popen("ulimit -c 2000000000 && nant test-xml 2>&1") {|f|
-        loglines(f)
-    }
-
+   
     collect_tests(testdir)
     
     if $? != 0
         raise "failed to run build"
      end
 end
+
+def clear_tests(testdir)
+    FileUtils.rm_rf testdir
+end
+
 
 def collect_tests(testdir)
     begin
@@ -145,7 +144,17 @@ def main
     begin
         dir = get_source(rev)
         get_jobid
-        pass = do_build(dir)
+        
+        testdir = "#{dir}/test-results"
+        clear_tests(testdir)
+      
+        @@testrun.starttime = DateTime.now
+      
+        pass = do_run(dir, @@buildcmd)
+        collect_tests(testdir)
+        
+        @@testrun.endtime = DateTime.now
+        
         @@testrun.success = true
         @@testrun.save
         # if we are succesful, remove the builddir
@@ -153,6 +162,8 @@ def main
         
     rescue => e
         puts e
+        @@testrun.endtime = DateTime.now
+        collect_tests(testdir)
         @@testrun.success = false
         @@testrun.save
     end
