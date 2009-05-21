@@ -1,6 +1,6 @@
 class GraphController < ApplicationController
     def index
-        @graph = open_flash_chart_object(1000, 500, url_for(:controller => "graph", :action => "graph_code"))
+        @graph = open_flash_chart_object(1000, 500, url_for(:controller => "graph", :action => "graph_code"), :base => relative_url_root)
     end
     
     def graph_code
