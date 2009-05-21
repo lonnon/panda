@@ -22,7 +22,7 @@
    <%= state_column(test) %>
   <td width="1px"><%= link_to "Run #{test.id}", test %></td>
   <td width="1px"><%= "#{test.passed} / #{test.skipped} / #{test.failed}" %></td>
-  <td><%= build_time(test) %></td>
+  <td>Run Duration: <%= test.runtime %> s</td>
   <td></td>
   </tr>
   <% end %>

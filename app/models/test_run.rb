@@ -7,6 +7,30 @@ class TestRun < ActiveRecord::Base
         rawtest = ""
     end
     
+    def checkouttime
+        if created_at and startime
+            return startime - created_at
+        else
+            return 0
+        end
+    end
+    
+    def runtime
+        if startime and endtime
+            return endtime - starttime
+        else
+            return 0
+        end
+    end
+
+    def cleanuptime
+        if endtime and success != nil
+            return updated_at - endtime
+        else 
+            return 0
+        end
+    end
+    
     def details
         doc = to_rexml
         results = Array.new
