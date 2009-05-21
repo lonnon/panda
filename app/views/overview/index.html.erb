@@ -34,22 +34,10 @@
    </tr>
 
    <% rev.test_runs.reverse.each do |test| %>
-   <% if test.success == false %>
-   <tr class="test_result">
-     <td class="spacer"></td>
-     <td><%= image_tag "reddot-small.png" %> Build Failed</td>
-    <% elsif test.success == true %>
-   <tr class="test_result">
-     <td class="spacer"></td>
-     <td><%= image_tag "greendot-small.png" %> Build Succeeded</td>
-     <% else %>
-   <tr class="test_run">
-     <td class="spacer"></td>
-     <td>Build in Progress</td>
-  <% end %>
+   <%= state_column(test) %>
   <td width="1px"><%= link_to "Run #{test.id}", test %></td>
   <td width="1px"><%= "#{test.passed} / #{test.skipped} / #{test.failed}" %></td>
-  <td></td>
+  <td><%= build_time(test) %></td>
   <td></td>
   </tr>
   <% end %>
