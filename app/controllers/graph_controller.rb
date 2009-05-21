@@ -10,7 +10,7 @@ class GraphController < ApplicationController
         
         values = []
         labels = []
-        tests.each do |test|
+        tests.reverse.each do |test|
             val = BarValue.new(test.runtime)
             if test.success
                 val.set_colour("#00bb00") 
