@@ -18,13 +18,16 @@ class GraphController < ApplicationController
                 val.set_colour("#ff0000")
             end
             values << val
-            labels << XAxisLabel.new(test.revision.identifier, '#0000ff', 20, 'diagonal')
+            labels << XAxisLabel.new(test.revision.identifier, '#0000ff', 12, 'diagonal')
         end
         
         x_labels = XAxisLabels.new
+        x_labels.set_vertical()
         x_labels.labels = labels
+        
         x = XAxis.new
         x.set_labels(x_labels)
+      
         y = YAxis.new
         y.set_range(0,600,60)
 
@@ -35,6 +38,11 @@ class GraphController < ApplicationController
         chart.set_title(title)
         chart.x_axis = x 
         chart.y_axis = y
+      
+        x_legend = XLegend.new("Release Number")
+        x_legend.set_style('{font-size: 12px; color: #778877}')
+        
+        chart.set_x_legend(x_legend)
         chart.add_element(bar)
         render :text => chart.to_s
     end
