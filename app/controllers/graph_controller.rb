@@ -6,7 +6,7 @@ class GraphController < ApplicationController
     def graph_code
         title = Title.new("Build Times")
         bar = BarGlass.new
-        tests = TestRun.find(:all, :limit => "20", :order => "id desc")
+        tests = TestRun.find(:all, :limit => "40", :order => "id desc")
         
         values = []
         labels = []
