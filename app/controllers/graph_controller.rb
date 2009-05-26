@@ -43,8 +43,13 @@ class GraphController < ApplicationController
       
         x_legend = XLegend.new("Release Number")
         x_legend.set_style('{font-size: 12px; color: #778877}')
-        
+
+        y_legend = XLegend.new("Build Time (seconds)")
+        y_legend.set_style('{font-size: 12px; color: #778877}')
+
         chart.set_x_legend(x_legend)
+        chart.set_y_legend(y_legend)
+
         chart.add_element(bar)
         render :text => chart.to_s
     end
