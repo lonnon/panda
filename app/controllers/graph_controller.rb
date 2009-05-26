@@ -7,7 +7,7 @@ class GraphController < ApplicationController
     end
     
     def graph_code
-        title = Title.new("#{Uname.uname}")
+        title = Title.new("#{Uname.nodename} #{Uname.version} #{Uname.machine}")
         bar = BarGlass.new
         tests = TestRun.find(:all, :limit => "40", :order => "id desc")
         
