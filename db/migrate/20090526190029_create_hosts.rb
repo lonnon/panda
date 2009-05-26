@@ -1,14 +1,15 @@
 class CreateHosts < ActiveRecord::Migration
-  def self.up
-    create_table :hosts do |t|
-      t.string :hostname
-      t.string :arch
+    def self.up
+        create_table :hosts do |t|
+            t.string :hostname
+            t.string :arch
+            t.string :root
 
-      t.timestamps
+            t.timestamps
+        end
     end
-  end
-
-  def self.down
-    drop_table :hosts
-  end
+    
+    def self.down
+        drop_table :hosts
+    end
 end
