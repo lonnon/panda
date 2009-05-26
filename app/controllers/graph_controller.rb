@@ -6,7 +6,7 @@ class GraphController < ApplicationController
     def graph_code
         title = Title.new("Build Times")
         bar = BarGlass.new
-        tests = TestRun.find(:all, :limit => "40", :order => "id desc")
+        tests = TestRun.find(:all, :limit => "20", :order => "id desc")
         
         values = []
         labels = []
@@ -18,14 +18,16 @@ class GraphController < ApplicationController
                 val.set_colour("#ff0000")
             end
             values << val
-            labels << XAxisLabel.new(test.revision.identifier, '#0000ff', 12, 'diagonal')
+            labels << XAxisLabel.new("#{test.revision.identifier}", '#0000ff', 12, 1)
         end
         
         x_labels = XAxisLabels.new
         x_labels.set_vertical()
+        x_labels.set_steps(2)
         x_labels.labels = labels
         
         x = XAxis.new
+        # x.set_steps(2)
         x.set_labels(x_labels)
       
         y = YAxis.new
