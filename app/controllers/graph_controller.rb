@@ -1,10 +1,13 @@
 class GraphController < ApplicationController
+    require "sys/uname"
+    include Sys
+    
     def index
         @graph = open_flash_chart_object(1000, 500, url_for(:controller => "graph", :action => "graph_code"), true, "#{relative_url_root}/")
     end
     
     def graph_code
-        title = Title.new("Build Times")
+        title = Title.new("#{Uname.uname}")
         bar = BarGlass.new
         tests = TestRun.find(:all, :limit => "40", :order => "id desc")
         
