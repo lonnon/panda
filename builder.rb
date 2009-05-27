@@ -143,11 +143,12 @@ def main
     @repo = @rev.repo
     @repo.test_sets.each do |set|
         @@testrun = init_testrun(set, @rev)
+        pp @@testrun
         env_dump
         
         begin
             get_source(@@testrun)
-        
+            
             @testdir = "#{@@testrun.builddir}/test-results"
             clear_tests(@testdir)
       
