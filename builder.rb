@@ -86,6 +86,7 @@ def clear_tests(testdir)
 end
 
 
+# this needs to be moved off into some nunit specific code path
 def collect_tests(testdir)
     begin
         total = 0
@@ -132,6 +133,7 @@ end
 
 def main
     rev = Revision.find(ARGV[0])
+    
     @@testrun = rev.test_runs.build
     @@testrun.log = ""
     # this creates the start time

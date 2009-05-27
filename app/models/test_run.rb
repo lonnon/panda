@@ -1,5 +1,6 @@
 class TestRun < ActiveRecord::Base
     belongs_to :revision
+    belongs_to :test_set
     require "rexml/document"
 
     def before_create
