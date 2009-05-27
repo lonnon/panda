@@ -1,6 +1,7 @@
 class Repo < ActiveRecord::Base
     require "rscm"
     has_many :revisions
+    has_many :test_sets
     
     def rscm
         if rtype == "svn"
