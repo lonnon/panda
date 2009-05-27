@@ -162,6 +162,8 @@ def main
             @@testrun.success = true
             @@testrun.save
             # if we are succesful, remove the builddir
+            # it is really important that we get out of the directory first, otherwise future chdir calls don't work
+            Dir.chdir("/")
             FileUtils.rm_rf(@@testrun.builddir, :secure => true)
             
         rescue => e
