@@ -17,20 +17,20 @@ nant test-xml
 BUILD
 
 
-def get_source(rev)
+def get_source(test)
     # get the repo object
-    repo = rev.repo.rscm
-    
-    repo.checkout_dir = rev.builddir
+    repo = test.revision.repo.rscm
+        
+    repo.checkout_dir = test.builddir
 
     # time based checkouts for subversion, identifiers for git
     if repo.is_a?(RSCM::Git)
-        repo.checkout(rev.identifier)
+        repo.checkout(test.revision.identifier)
     else
-        repo.checkout(rev.time)
+        repo.checkout(test.revision.time)
     end
     
-    return rev.builddir
+    return test.builddir
 end
 
 def loglines(f)
@@ -126,45 +126,62 @@ end
 def get_jobid
     job = Bj.table.job.find(:first, :conditions => ["state = ?", "running"])
     if job
-        @@testrun.job_id = job.id
-        @@testrun.save
+        return job.id
+    else
+        return nil
     end
 end
 
+def init_testrun(set, rev)
+    set.environment.variables.split(/[\n\r]/).each do |line|
+        if line =~ /^(.*?)=(.*)/
+            puts "Setting #{$1} => #{$2}"
+            ENV[$1] = $2
+        end
+    end
+        
+    testrun = set.test_runs.build
+    testrun.revision_id = rev.id
+    testrun.log = ""
+    testrun.rawtest = ""
+    testrun.builddir = "#{rev.builddir}-#{set.id}"
+    testrun.job_id = get_jobid
+    testrun.save
+    return testrun
+end
+
 def main
-    rev = Revision.find(ARGV[0])
-    
-    @@testrun = rev.test_runs.build
-    @@testrun.log = ""
-    # this creates the start time
-    @@testrun.save
-    begin
-        # first, back reference ourselves
-        get_jobid
+    @rev = Revision.find(ARGV[0])
+    @repo = @rev.repo
+    @repo.test_sets.each do |set|
+        @@testrun = init_testrun(set, @rev)
+        env_dump
         
-        dir = get_source(rev)
+        begin
+            dir = get_source(@@testrun)
         
-        @testdir = "#{dir}/test-results"
-        clear_tests(@testdir)
+            @testdir = "#{dir}/test-results"
+            clear_tests(@testdir)
       
-        @@testrun.starttime = DateTime.now
+            @@testrun.starttime = DateTime.now
       
-        pass = do_run(dir, @@buildcmd)
-        collect_tests(@testdir)
+            pass = do_run(dir, set.procedure.commands)
+            collect_tests(@testdir)
         
-        @@testrun.endtime = DateTime.now
-        
-        @@testrun.success = true
-        @@testrun.save
-        # if we are succesful, remove the builddir
-        FileUtils.rm_rf(dir, :secure => true)
-        
-    rescue => e
-        puts e
-        @@testrun.endtime = DateTime.now
-        collect_tests(@testdir)
-        @@testrun.success = false
-        @@testrun.save
+            @@testrun.endtime = DateTime.now
+            
+            @@testrun.success = true
+            @@testrun.save
+            # if we are succesful, remove the builddir
+            FileUtils.rm_rf(dir, :secure => true)
+            
+        rescue => e
+            puts e
+            @@testrun.endtime = DateTime.now
+            collect_tests(@testdir)
+            @@testrun.success = false
+            @@testrun.save
+        end
     end
 end
 
