@@ -5,18 +5,6 @@ require "rubygems"
 require "rscm"
 require "rexml/document"
 
-ENV['PATH'] = "/usr/local/bin:#{ENV['PATH']}"
-ENV['PKG_CONFIG_PATH'] = "/usr/local/lib/pkgconfig:/usr/lib/pkgconfig"
-
-@@testrun = nil
-@@log = ""
-@@buildcmd = <<BUILD
-./runprebuild.sh
-nant clean
-nant test-xml
-BUILD
-
-
 def get_source(test)
     # get the repo object
     repo = test.revision.repo.rscm
@@ -158,14 +146,14 @@ def main
         env_dump
         
         begin
-            dir = get_source(@@testrun)
+            get_source(@@testrun)
         
-            @testdir = "#{dir}/test-results"
+            @testdir = "#{@@testrun.builddir}/test-results"
             clear_tests(@testdir)
       
             @@testrun.starttime = DateTime.now
       
-            pass = do_run(dir, set.procedure.commands)
+            pass = do_run(@@testrun.builddir, set.procedure.commands)
             collect_tests(@testdir)
         
             @@testrun.endtime = DateTime.now
@@ -173,7 +161,7 @@ def main
             @@testrun.success = true
             @@testrun.save
             # if we are succesful, remove the builddir
-            FileUtils.rm_rf(dir, :secure => true)
+            FileUtils.rm_rf(@@testrun.builddir, :secure => true)
             
         rescue => e
             puts e
