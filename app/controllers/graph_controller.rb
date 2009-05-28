@@ -88,7 +88,7 @@ class GraphController < ApplicationController
         
         title = Title.new("#{set.repo.name} : #{set.name} - #{Uname.machine}")
         bar = BarGlass.new
-        tests = set.test_runs.find(:all, :limit => "40", :order => "id desc")
+        tests = set.test_runs.find(:all, :limit => "30", :order => "id desc")
         
         values = []
         labels = []
