@@ -20,7 +20,7 @@ class GraphController < ApplicationController
         
         # make the bars
         barvals = {}
-        sets.each do set
+        sets.each do |set|
             barvals[set.id] = []
         end
         
@@ -31,7 +31,7 @@ class GraphController < ApplicationController
         revisions.reverse.each do |rev|
             labels << XAxisLabel.new("#{rev.identifier}", '#0000ff', 12, 1)
 
-            sets.each do set
+            sets.each do |set|
                 test = set.find(:first, :conditions => ["revision_id = ?", rev.id])
                 val = BarValue.new(0)
                 if test
@@ -74,7 +74,7 @@ class GraphController < ApplicationController
         chart.set_x_legend(x_legend)
         chart.set_y_legend(y_legend)
 
-        sets.each do set
+        sets.each do |set|
             bar = BarGlass.new
             bar.set_values(barvals[set.id])
             chart.add_element(bar)
