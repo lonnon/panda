@@ -36,7 +36,7 @@ class GraphController < ApplicationController
                 val = BarValue.new(0)
                 if test
                     val = BarValue.new(test.runtime)
-                    color = (set.id * 13) % 10
+                    color = (set.id * 13) % 8
                     if test.success
                         val.set_colour("#00bb#{color}0") 
                     else
