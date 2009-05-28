@@ -26,7 +26,7 @@ class GraphController < ApplicationController
         
         title = Title.new("#{repo.name} : #{Uname.machine} - comparison graph")
         
-        values = []
+        labels = []
 
         revisions.reverse.each do |rev|
             labels << XAxisLabel.new("#{rev.identifier}", '#0000ff', 12, 1)
