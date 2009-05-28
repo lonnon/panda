@@ -1,2 +1,5 @@
 <%= javascript_include_tag "swfobject" %>
-<%= @graph %>
+<% @graphs.each do |graph| %>
+<p>
+<%= graph %>
+<% end %>

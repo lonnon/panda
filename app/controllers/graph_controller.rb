@@ -3,13 +3,21 @@ class GraphController < ApplicationController
     include Sys
     
     def index
-        @graph = open_flash_chart_object(1000, 500, url_for(:controller => "graph", :action => "graph_code"), true, "#{relative_url_root}/")
+        @graphs = []
+        repos = Repo.find(:all)
+        repos.each do |repo|
+            repo.test_sets.each do |set|
+                @graphs << open_flash_chart_object(1000, 500, url_for(:controller => "graph", :action => "graph_code", :id => set.id), true, "#{relative_url_root}/")
+            end
+        end
     end
     
     def graph_code
-        title = Title.new("#{Uname.nodename} #{Uname.version} #{Uname.machine}")
+        set = TestSet.find(params[:id])
+        
+        title = Title.new("#{set.repo.name} : #{set.name} - #{set.environment.name}")
         bar = BarGlass.new
-        tests = TestRun.find(:all, :limit => "40", :order => "id desc")
+        tests = set.test_runs.find(:all, :limit => "40", :order => "id desc")
         
         values = []
         labels = []
