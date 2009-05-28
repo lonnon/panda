@@ -15,7 +15,7 @@ class GraphController < ApplicationController
     def graph_code
         set = TestSet.find(params[:id])
         
-        title = Title.new("#{set.repo.name} : #{set.name} - #{set.environment.name}")
+        title = Title.new("#{set.repo.name} : #{set.name} - #{Uname.machine}")
         bar = BarGlass.new
         tests = set.test_runs.find(:all, :limit => "40", :order => "id desc")
         
