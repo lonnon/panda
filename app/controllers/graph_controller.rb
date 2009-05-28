@@ -16,7 +16,7 @@ class GraphController < ApplicationController
     def compare_graph
         repo = Repo.find(params[:id])
         sets = repo.test_sets
-        revisions = repo.revisions.find(:all, :limit => "40", :order => "time desc")
+        revisions = repo.revisions.find(:all, :limit => "30", :order => "time desc")
         
         # make the bars
         barvals = {}
@@ -88,7 +88,7 @@ class GraphController < ApplicationController
         
         title = Title.new("#{set.repo.name} : #{set.name} - #{Uname.machine}")
         bar = BarGlass.new
-        tests = set.test_runs.find(:all, :limit => "20", :order => "id desc")
+        tests = set.test_runs.find(:all, :limit => "40", :order => "id desc")
         
         values = []
         labels = []
