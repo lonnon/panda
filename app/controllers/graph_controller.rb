@@ -23,14 +23,13 @@ class GraphController < ApplicationController
         sets.each do set
             barvals[set.id] = []
         end
-
         
-        title = Title.new("#{set.repo.name} : #{Uname.machine} - comparison graph")
+        title = Title.new("#{repo.name} : #{Uname.machine} - comparison graph")
         
         values = []
 
         revisions.reverse.each do |rev|
-            labels << XAxisLabel.new("#{test.revision.identifier}", '#0000ff', 12, 1)
+            labels << XAxisLabel.new("#{rev.identifier}", '#0000ff', 12, 1)
 
             sets.each do set
                 test = set.find(:first, :conditions => ["revision_id = ?", rev.id])
