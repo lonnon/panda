@@ -32,7 +32,7 @@ class GraphController < ApplicationController
             labels << XAxisLabel.new("#{rev.identifier}", '#0000ff', 12, 1)
 
             sets.each do |set|
-                test = set.find(:first, :conditions => ["revision_id = ?", rev.id])
+                test = set.test_runs.find(:first, :conditions => ["revision_id = ?", rev.id])
                 val = BarValue.new(0)
                 if test
                     val = BarValue.new(test.runtime)
