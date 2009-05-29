@@ -9,7 +9,7 @@ repos.each do |repo|
 	FileUtils.rm_rf(rev.builddir)
         rev.test_runs.each do |test|
             if test.builddir
-                FileUtils.rm_rf(rev.builddir)
+                FileUtils.rm_rf(test.builddir)
             end
         end
  	rev.test_runs.destroy_all
