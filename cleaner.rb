@@ -12,7 +12,7 @@ end
 
 def main
     tests = TestRun.find(:all, :conditions => ["success is null and created_at < ?", 15.minutes.ago])
-   
+    
     tests.each do |test|
         pid = pidofmono
         begin
