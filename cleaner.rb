@@ -11,23 +11,19 @@ end
 
 
 def main
-    jobs = Bj.table.job.find(:all)
-    
-    jobs.each do |job|
-        if (job.state == "running") and (job.started_at < 30.minutes.ago)
-            # capture job so we can restart it
-            cmd = job.command
-            
-            pid = pidofmono
-            begin
-                Process.kill(2, pid)
-                sleep 5
-                Process.kill(9, pid)
-            rescue => e
-                # don't really care
-            end
-            Bj.sumbit cmd
+    tests = TestRun.find(:all, :conditions => ["success is null and created_at < ?", 15.minutes.ago])
+   
+    tests.each do |test|
+        pid = pidofmono
+        begin
+            Process.kill(2, pid)
+            sleep 5
+            Process.kill(9, pid)
+        rescue => e
+            # don't really care
         end
+        test.success = false
+        test.save
     end
 end
 
