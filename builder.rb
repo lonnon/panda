@@ -28,10 +28,6 @@ def loglines(f)
             line = f.readline
             puts line
             @@testrun.log += line
-            count += 1
-            if (count % 10) == 0
-                @@testrun.save
-            end
         end
     rescue EOFError
     end
