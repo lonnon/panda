@@ -1,8 +1,8 @@
 class CoresController < ApplicationController
   def show
-      rev = Revision.find(params[:id])
+      test = TestRun.find(params[:id])
       core = params[:corefile]
-      corefile = "#{rev.builddir}/#{core}"
+      corefile = "#{test.builddir}/#{core}"
       # these checks are important, because otherwise any arbitrary
       # file could be served out of your fs
       if core !~ /^core\.\d+$/ or not File.exists?(corefile)
