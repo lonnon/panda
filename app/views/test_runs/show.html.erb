@@ -37,13 +37,13 @@
   <td><%= @test.failed %></td>
 </table>
 
-<% @cores = list_cores(@test.revision) %>
+<% @cores = list_cores(@test) %>
 <% if @cores.size > 0 %>
 <h2>Core Dumps</h2>
 <ul>
 <% @cores.each do |core| %>
 <li><%= link_to core, :controller => :cores, :action => :show, 
-:id => @test.revision.id, :corefile => core %></li>
+:id => @test.id, :corefile => core %></li>
 <% end %>
 </ul>
 <% end %>
