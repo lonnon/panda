@@ -1,8 +1,8 @@
 module TestrunsHelper
-    def list_cores(rev)
+    def list_cores(test)
         cores = []
-        if File.directory? rev.builddir
-            Dir.foreach rev.builddir do |f|
+        if File.directory? test.builddir
+            Dir.foreach "#{test.builddir}/bin" do |f|
                 if f =~ /^core.\d+/
                     cores << f
                 end
