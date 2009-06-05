@@ -35,12 +35,11 @@ way, and ruby is perfectly addequate as a job runner.
   too.
 * MySQL 5.x.  Background job doesn't like sqlite, and I didn't debug
   why, run this application on MySQL
-* my rscm build (it has fixes for linux).  For this:
+* rscm 0.5.4 from gems.github.com.  
+* background job gem
+* RedCloth gem
 
- git clone git://github.com/sdague/rscm.git
- cd rscm
- rake gem
- sudo gem install ./pkg/rscm-0.5.2.gem
+For the gems you can just "rake gems:install" and they'll come down correctly.
 
 == Install Procedure
 
@@ -62,17 +61,9 @@ http://modrails.com for instructions).
 Next, set up a crontab for the running, collector, and cleaner.  There
 is an example in crontab.example in this repository.
 
-Lastly, you need to create a repository definition.  There is
-currently no admin interface to panda, so you need to do this in the
-rails console.  Do this via:
-
- RAILS_ENV=production ./script/console 
- >> r = Repo.new
- >> r.name = "some name"
- >> r.rtype = "svn" 
- >> r.url = "svn url" 
- >> r.builddir = "/tmp"
- >> r.save
+Lastly, you need to create definitions for the repository,
+environment, procedures and testsets.  There is an init.rb that can be
+run as an example of setting that up for OpenSim.
 
 At this point the scheduled collector will start collecting repository
 revisions and build the most recent one found.
