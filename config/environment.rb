@@ -25,6 +25,7 @@ Rails::Initializer.run do |config|
   # You have to specify the :lib option for libraries, where the Gem name (sqlite3-ruby) differs from the file itself (sqlite3)
     config.gem "bj"
     config.gem "RedCloth"
+    config.gem "sys-uname", :version => '0.8.3'
     config.gem "sdague-rscm", :version => '0.5.4', :lib => "rscm", :source => "http://gems.github.com"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
