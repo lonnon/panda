@@ -9,7 +9,6 @@ class Repo < ActiveRecord::Base
         elsif rtype == "git"
             # for git we need a local cache to work off of
             rscm = RSCM::Git.new(url)
-            rscm.depth = 100
             rscm.checkout_dir = "#{builddir}/panda-git-#{name}"
             rscm.checkout
             return rscm
