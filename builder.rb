@@ -135,6 +135,7 @@ def init_testrun(set, rev)
 end
 
 def main
+    @@home = Dir.pwd
     @rev = Revision.find(ARGV[0])
     @repo = @rev.repo
     @repo.test_sets.each do |set|
@@ -159,7 +160,7 @@ def main
             @@testrun.save
             # if we are succesful, remove the builddir
             # it is really important that we get out of the directory first, otherwise future chdir calls don't work
-            Dir.chdir("/")
+            Dir.chdir(@@home)
             FileUtils.rm_rf(@@testrun.builddir, :secure => true)
             
         rescue => e
