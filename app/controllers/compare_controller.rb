@@ -1,7 +1,6 @@
 class CompareController < ApplicationController
     require "open-uri"
-    
-    
+
     def buildtimes
         @hosts = Host.find(:all)
         @charts = []
