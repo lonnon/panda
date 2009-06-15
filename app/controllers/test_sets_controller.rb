@@ -4,7 +4,7 @@ class TestSetsController < ApplicationController
         run = test_set.test_runs.find(:first, :order => "id desc")
         
         respond_to do |format|
-            format.xml {render :xml => run.rawtest}
+            format.xml {render :xml => "<xml>#{run.rawtest}</xml>"}
         end
     end
 end
