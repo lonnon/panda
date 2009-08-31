@@ -10,7 +10,7 @@ class OverviewController < ApplicationController
         end
         @revs = []
         Repo.find(:all).each do |repo|
-            @revs << repo.revisions.find(:all, :limit => 20, :order => "time desc").select {|r| r.test_runs.length > 0}
+            @revs << repo.revisions.find(:all, :limit => 20, :order => "time desc")
             @revs.flatten!
         end
         @revs.sort_by {|r| r.time}
