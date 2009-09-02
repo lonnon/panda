@@ -72,7 +72,7 @@ run as an example of setting that up for OpenSim.
 At this point the scheduled collector will start collecting repository
 revisions and build the most recent one found.
 
-== Normal Running ==
+== Normal Running
 The cron jobs set up above represent all the execution of panda that
 is required outside of the web application.
 
