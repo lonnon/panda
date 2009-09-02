@@ -59,9 +59,9 @@ Then deploy that directory as a passenger application (go read
 http://modrails.com for instructions).
 
 Next, set up a crontab to run:
- * bj (background job) for handing the queue processing
- * collector.rb for finding new revisions
- * cleaner.rb for whacking failed jobs
+* bj (background job) for handing the queue processing
+* collector.rb for finding new revisions
+* cleaner.rb for whacking failed jobs
 
 The example crontab.example is a useful starting point here.
 
