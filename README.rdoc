@@ -58,8 +58,12 @@ scope of this document.
 Then deploy that directory as a passenger application (go read
 http://modrails.com for instructions).
 
-Next, set up a crontab for the running, collector, and cleaner.  There
-is an example in crontab.example in this repository.
+Next, set up a crontab to run:
+ * bj (background job) for handing the queue processing
+ * collector.rb for finding new revisions
+ * cleaner.rb for whacking failed jobs
+
+The example crontab.example is a useful starting point here.
 
 Lastly, you need to create definitions for the repository,
 environment, procedures and testsets.  There is an init.rb that can be
@@ -67,4 +71,13 @@ run as an example of setting that up for OpenSim.
 
 At this point the scheduled collector will start collecting repository
 revisions and build the most recent one found.
+
+== Normal Running ==
+The cron jobs set up above represent all the execution of panda that
+is required outside of the web application.
+
+If you need to restart the web application (to take on a code update)
+you can either restart apache, or touch tmp/restart.txt in the panda
+working directory, which will just trigger a restart of passenger.
+
 
