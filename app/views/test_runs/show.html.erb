@@ -48,8 +48,10 @@
 </ul>
 <% end %>
 
+<% if @test.test_log %>
 <h2>Raw Log Output (stdout &amp; stderr)</h2>
 <pre><%=h @test.test_log.stdout %></pre>
 
 <h2>Raw Test Output</h2>
 <pre><%= h(@test.test_log.rawtest).gsub(/\&lt\;failure/, "<b><font color='red'>&lt;failure").gsub(/\/failure&gt;/, "/failure&gt;</font></b>") %></pre>
+<% end %>
