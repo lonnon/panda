@@ -1,11 +1,15 @@
 class TestRun < ActiveRecord::Base
     belongs_to :revision
     belongs_to :test_set
+    has_one :test_log
     require "rexml/document"
 
+    # This should probably be in the test_log model, but it's here for now
     def before_create
-        log = ""
-        rawtest = ""
+        test_log = TestLog.new
+        test_log.stdout = ""
+        test_log.rawtest = ""
+        test_log.save
     end
     
     def checkouttime
@@ -50,8 +54,8 @@ class TestRun < ActiveRecord::Base
     
     private 
     def to_rexml
-        if rawtest
-            return REXML::Document.new "<xml>#{rawtest.gsub(/<\?xml.*?\?>/, '')}</xml>"
+        if test_log and test_log.rawtest
+            return REXML::Document.new "<xml>#{test_log.rawtest.gsub(/<\?xml.*?\?>/, '')}</xml>"
         else
             return REXML::Document.new "<xml></xml>"
         end

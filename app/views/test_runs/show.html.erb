@@ -49,7 +49,7 @@
 <% end %>
 
 <h2>Raw Log Output (stdout &amp; stderr)</h2>
-<pre><%=h @test.log %></pre>
+<pre><%=h @test.test_log.stdout %></pre>
 
 <h2>Raw Test Output</h2>
-<pre><%= h(@test.rawtest).gsub(/\&lt\;failure/, "<b><font color='red'>&lt;failure").gsub(/\/failure&gt;/, "/failure&gt;</font></b>") %></pre>
+<pre><%= h(@test.test_log.rawtest).gsub(/\&lt\;failure/, "<b><font color='red'>&lt;failure").gsub(/\/failure&gt;/, "/failure&gt;</font></b>") %></pre>

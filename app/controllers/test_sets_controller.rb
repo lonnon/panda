@@ -3,7 +3,7 @@ class TestSetsController < ApplicationController
         test_set = TestSet.find(params[:id])
         run = test_set.test_runs.find(:first, :order => "id desc")
         
-        data = run.rawtest.gsub(/\<\?xml version="1.0" encoding="utf-8" standalone="no"\?\>/, '')
+        data = run.test_log.rawtest.gsub(/\<\?xml version="1.0" encoding="utf-8" standalone="no"\?\>/, '')
         data = "<xml>#{data}</xml>"
         
         respond_to do |format|

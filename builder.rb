@@ -27,7 +27,7 @@ def loglines(f)
         while true
             line = f.readline
             puts line
-            @@testrun.log += line
+            @@testrun.test_log.stdout += line
         end
     rescue EOFError
     end
@@ -59,7 +59,7 @@ def do_run(dir, cmd)
         # we failed during the command
         if $? != 0
             failmsg = "FAILED on command '#{cmdline}'"
-            @@testrun.log += failmsg
+            @@testrun.test_log.stdout += failmsg
             raise failmsg
         end
     end
@@ -76,14 +76,14 @@ def collect_tests(testdir)
         total = 0
         failed = 0
         skipped = 0
-        @@testrun.rawtest = ""
+        @@testrun.test_log.rawtest = ""
         Dir.foreach(testdir) do |x|
             if x =~ /\.xml$/ 
                 file = "#{testdir}/#{x}"
                 
                 File.open(file, "r") do |f|
                     while (line = f.gets) 
-                        @@testrun.rawtest += line
+                        @@testrun.test_log.rawtest += line
                     end
                 end
                 
@@ -126,8 +126,8 @@ def init_testrun(set, rev)
         
     testrun = set.test_runs.build
     testrun.revision_id = rev.id
-    testrun.log = ""
-    testrun.rawtest = ""
+    testrun.test_log.stdout = ""
+    testrun.test_log.rawtest = ""
     testrun.builddir = "#{rev.builddir}-#{set.id}"
     testrun.job_id = get_jobid
     testrun.save
