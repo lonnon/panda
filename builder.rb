@@ -126,11 +126,12 @@ def init_testrun(set, rev)
         
     testrun = set.test_runs.build
     testrun.revision_id = rev.id
-    testrun.test_log.stdout = ""
-    testrun.test_log.rawtest = ""
     testrun.builddir = "#{rev.builddir}-#{set.id}"
     testrun.job_id = get_jobid
     testrun.save
+    test_log = test_run.create(:stdout => "", :rawtest => "")
+    test_log.save
+
     return testrun
 end
 
