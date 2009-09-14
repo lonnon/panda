@@ -31,6 +31,7 @@ def loglines(f)
         end
     rescue EOFError
     end
+    @@testrun.test_log.save
     @@testrun.save
 end
 
@@ -60,6 +61,7 @@ def do_run(dir, cmd)
         if $? != 0
             failmsg = "FAILED on command '#{cmdline}'"
             @@testrun.test_log.stdout += failmsg
+            @@testrun.test_log.save
             raise failmsg
         end
     end
@@ -86,6 +88,7 @@ def collect_tests(testdir)
                         @@testrun.test_log.rawtest += line
                     end
                 end
+                @@testrun.test_log.save
                 
                 doc = REXML::Document.new File.new file
                 # puts doc.root.attribute :name ok, a little wierd,
